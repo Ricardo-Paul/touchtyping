@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap');
+
+body{
+  background-color: rgb(253, 249, 249);
+  color: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+}
+
+h2{
+  font-weight: 900;
+}
+
+#command-center{
+  /* background-color: bisque; */
+  width: 100%;
+  max-width: 40rem;
+  padding: .5rem;
+}
+
+.bar{
+  padding-bottom: 1.2rem;
+  margin-top: .5rem;
+  /* background-color: rgb(192, 192, 248); */
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2rem;
+  color: rgb(0, 0, 5);
+  padding: .5rem;
+}
+
+#time-count{
+  display: none;
+}
+
+#typing-area{
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  margin-top: .5rem;
+  background-color: rgb(49, 49, 49);
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+#text-display{
+  padding: .5rem;
+  font-size: 1.2rem;
+  /* background-color: azure; */
+}
+
+#input-field{
+  width: 100%;
+  padding: .5rem;
+  font-size: 1.2rem;
+  margin-right: .5rem;
+  border-radius: .5rem;
+  outline: none;
+}
+
+#redo-button{
+  padding: .5rem;
+  background-color: rgb(241,115,47);
+  border-radius: .5rem;
+  border: none;
+}
+
+#theme-center{
+  display: none;
+}
