@@ -1,10 +1,23 @@
 const textDisplay = document.querySelector("#text-display");
 
 let randomWords = [];
-const defaultLanguage = "english"
+let wordList = []; //displayed words
+const defaultLanguage = "english";
+const defaultWordCount = 25;
 
-// check whether the user has chosen a language
+const cookies = {
+  language: "LANGUAGE",
+  expireAfter: 5
+}
 
+
+function fillWordList(_wordCount = defaultWordCount){
+  for(i=0; i < _wordCount; i++ ){
+    let random = Math.floor(Math.random() * randomWords.length);
+    wordList.push(randomWords[random].trim());
+  };
+  console.log(wordList);
+}
 
 function setLanguage(_language = defaultLanguage){
   fetch("data/words.json")
@@ -14,7 +27,9 @@ function setLanguage(_language = defaultLanguage){
       console.log(`We currently don't support ${_language}`);
     };
     randomWords = json[_language].split(" ");
-    console.log(randomWords)
+    setCookie(cookies.language, _language, cookies.expireAfter);
+    fillWordList();
+    // console.log(randomWords);
   });
 };
 
