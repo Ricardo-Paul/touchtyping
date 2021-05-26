@@ -28,3 +28,21 @@ function setCookie(cname, cvalue, exdays){
   let expires = "expires=" + d.toUTCString();
   document.cookie = cname + "=" + cvalue + ";" + exdays + expires + ";" + "path=/"
 };
+
+function getCookie(cname){
+  // let cookies = decodeURIComponent(document.cookie);
+  let c = "timeCount=60; typingMode=wordcount; punctuation=false; _ga=GA1.2.212430062.1621050011; theme=moderndolch; wordCount=25; _gid=GA1.2.2029559042.1621902074; language=english; _gat_gtag_UA_126815322_3=1"
+
+  let cookies = decodeURIComponent(c);
+  let ca = cookies.split(";");
+  for(i=0; i < ca.length; i++){
+    let el = ca[i].trim();
+    if(el.indexOf(cname) == 0){
+      let r =  el.substring(cname.length + 1);
+      console.log(r);
+      return r;
+    }
+  };
+}
+
+getCookie("timeCount");
