@@ -19,6 +19,12 @@ h2{
   max-width: 40rem;
   padding: .5rem;
 }
+#left-wing{
+  color: #484847;
+}
+#right-wing{
+  color: #484847;
+}
 
 .bar{
   padding-bottom: 1.2rem;
@@ -42,30 +48,34 @@ h2{
   margin-top: .5rem;
   background-color: rgb(117, 116, 116);
   padding: 1rem;
-  border-radius: 1rem;
+  border-radius: .2rem;
 }
 
 #text-display{
   padding: .5rem;
   font-size: 1.2rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #f5deb3;
   /* background-color: azure; */
 }
 
 #input-field{
-  width: 100%;
+  width: 90%;
   padding: .5rem;
   font-size: 1.2rem;
   margin-right: .5rem;
-  border-radius: .5rem;
+  border-radius: .2rem;
   outline: none;
   border: none;
 }
 
 #redo-button{
   padding: .5rem;
-  background-color: rgb(241,115,47);
-  border-radius: .5rem;
+  background-color: rgb(253 249 249);
+  border-radius: .2rem;
   border: none;
+  width: 3rem;
+  cursor: pointer;
 }
 
 #theme-center{
