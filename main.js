@@ -32,12 +32,14 @@ function fillWordList(_wordCount = defaultWordCount){
 };
 
 function showText(){
-  textDisplay.innerHTML = " ";
+  // textDisplay.innerHTML = " ";
   wordList.forEach(word => {
     let span = document.createElement("span");
     span.innerHTML = word + " ";
     textDisplay.appendChild(span);
   });
+  textDisplay.firstChild.classList.add("highlight")
+  console.log("First child", textDisplay.firstChild)
 }
 
 inputField.addEventListener("keydown", (e) => {
