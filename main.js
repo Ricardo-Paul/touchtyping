@@ -7,16 +7,36 @@ const defaultWordCount = 25;
 
 const cookies = {
   language: "LANGUAGE",
+  wordCount: "WORDCOUNT",
   expireAfter: 5
 }
 
+let testsWords = "hello world hello".split(" ");
 
 function fillWordList(_wordCount = defaultWordCount){
-  for(i=0; i < _wordCount; i++ ){
+  // decide whether to empty the wordlist when shift is pressed
+
+  // it's better to fetch wordcount from cookie 
+  let wordCount = getCookie(cookies.wordCount) || _wordCount;
+  setCookie(cookies.wordCount, wordCount, cookies.expireAfter);
+  for(i=0; i < wordCount; i++ ){
     let random = Math.floor(Math.random() * randomWords.length);
-    wordList.push(randomWords[random].trim());
+    // don't display the same word consequently
+      wordList.push(randomWords[random].trim());
   };
+
+  showText();
   console.log(wordList);
+};
+
+function showText(){
+  textDisplay.innerHTML = " ";
+  wordList.forEach(word => {
+    let span = document.createElement("span");
+    span.innerHTML = word + " ";
+    textDisplay.appendChild(span);
+    console.log(span);
+  });
 }
 
 function setLanguage(_language = defaultLanguage){
@@ -33,7 +53,7 @@ function setLanguage(_language = defaultLanguage){
   });
 };
 
-setLanguage("english");
+setLanguage("english"); // start the program
 
 
 // set cookie along with an expiry date
@@ -59,6 +79,6 @@ function getCookie(cname){
       return r;
     }
   };
-}
+};
 
 getCookie("timeCount");
