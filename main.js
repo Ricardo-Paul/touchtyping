@@ -1,9 +1,11 @@
 const textDisplay = document.querySelector("#text-display");
+const inputField = document.querySelector("#input-field");
 
 let randomWords = [];
 let wordList = []; //displayed words
 const defaultLanguage = "english";
 const defaultWordCount = 25;
+let cuurentWord = 0;
 
 const cookies = {
   language: "LANGUAGE",
@@ -35,9 +37,51 @@ function showText(){
     let span = document.createElement("span");
     span.innerHTML = word + " ";
     textDisplay.appendChild(span);
-    console.log(span);
   });
 }
+
+inputField.addEventListener("keydown", (e) => {
+  if(cuurentWord < wordList.length){
+    checkSpelling();
+    function checkSpelling(){
+      // the characters we take as value along with the alpha
+      const specialChars = [".", ",", ";", "\"", "\'"];
+      const isAlpha = e.key >= "a" && e.key <= "z";
+
+      if(isAlpha || specialChars.includes(e.key)){
+        let currentInput = inputField.value + e.key;
+        let currentWordSlice = wordList[cuurentWord];
+        console.log("CI:", currentInput, "CWS:", currentWordSlice);
+        console.log(currentWordSlice.indexOf(currentInput.trim()));
+
+        if(currentWordSlice.indexOf(currentInput.trim()) == -1){
+          inputField.classList.add("wrong");
+        } else {
+          inputField.classList.remove("wrong");
+        };
+      };
+
+      if(e.key === "Backspace"){
+        let currentInput = inputField.value.slice(0, inputField.value.length - 1);
+
+        let currentWordSlice = wordList[cuurentWord]
+        console.log("CI:", currentInput, "CWS:", currentWordSlice);
+        console.log(currentWordSlice.indexOf(currentInput.trim()));
+
+        if(currentWordSlice.indexOf(currentInput.trim()) == -1){
+          inputField.classList.add("wrong");
+        } else {
+          inputField.classList.remove("wrong");
+        };
+      }
+
+      if(e.key === " "){
+        cuurentWord++;
+        inputField.value = "";
+      }
+    }
+  }
+})
 
 function setLanguage(_language = defaultLanguage){
   fetch("data/words.json")

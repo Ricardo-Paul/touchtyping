@@ -59,6 +59,11 @@ h2{
   /* background-color: azure; */
 }
 
+
+.wrong{
+  background-color: #f1bdbd;
+}
+
 #input-field{
   width: 90%;
   padding: .5rem;
@@ -80,4 +85,4 @@ h2{
 
 #theme-center{
   display: none;
-}
+};
