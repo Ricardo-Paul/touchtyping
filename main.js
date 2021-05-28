@@ -1,11 +1,12 @@
 const textDisplay = document.querySelector("#text-display");
 const inputField = document.querySelector("#input-field");
 
+
 let randomWords = [];
 let wordList = []; //displayed words
 const defaultLanguage = "english";
 const defaultWordCount = 25;
-let cuurentWord = 0;
+let currentWord = 0;
 
 const cookies = {
   language: "LANGUAGE",
@@ -32,18 +33,17 @@ function fillWordList(_wordCount = defaultWordCount){
 };
 
 function showText(){
-  // textDisplay.innerHTML = " ";
+  textDisplay.innerHTML = "";
   wordList.forEach(word => {
     let span = document.createElement("span");
     span.innerHTML = word + " ";
     textDisplay.appendChild(span);
   });
-  textDisplay.firstChild.classList.add("highlight")
-  console.log("First child", textDisplay.firstChild)
+  textDisplay.firstChild.classList.add("highlight");
 }
 
 inputField.addEventListener("keydown", (e) => {
-  if(cuurentWord < wordList.length){
+  if(currentWord < wordList.length){
     checkSpelling();
     function checkSpelling(){
       // the characters we take as value along with the alpha
@@ -52,7 +52,7 @@ inputField.addEventListener("keydown", (e) => {
 
       if(isAlpha || specialChars.includes(e.key)){
         let currentInput = inputField.value + e.key;
-        let currentWordSlice = wordList[cuurentWord];
+        let currentWordSlice = wordList[currentWord];
         console.log("CI:", currentInput, "CWS:", currentWordSlice);
         console.log(currentWordSlice.indexOf(currentInput.trim()));
 
@@ -66,7 +66,7 @@ inputField.addEventListener("keydown", (e) => {
       if(e.key === "Backspace"){
         let currentInput = inputField.value.slice(0, inputField.value.length - 1);
 
-        let currentWordSlice = wordList[cuurentWord]
+        let currentWordSlice = wordList[currentWord]
         console.log("CI:", currentInput, "CWS:", currentWordSlice);
         console.log(currentWordSlice.indexOf(currentInput.trim()));
 
@@ -78,14 +78,27 @@ inputField.addEventListener("keydown", (e) => {
       }
 
       if(e.key === " "){
-        cuurentWord++;
-        inputField.value = "";
+        if(inputField.value.trim() !== ""){
+          // making sure this is not the last word in the list
+          if(currentWord < wordList.length - 1){
+            console.log("FIELD VALUE:", inputField.value, "CW:", wordList[currentWord]);
+            let fieldValue = inputField.value;
+            if(fieldValue.trim() === wordList[currentWord]){
+              console.log("RIGHT WORD");
+              textDisplay.childNodes[currentWord].classList.add("correct");
+              console.log("CURRENT WORD NODE: ",textDisplay.childNodes[currentWord])
+            }
+            currentWord++;
+            inputField.value = "";
+          }
+        }
       }
     }
   }
 })
 
 function setLanguage(_language = defaultLanguage){
+  textDisplay.innerHTML = "Loading text..."
   fetch("data/words.json")
   .then(response => response.json())
   .then(json => {

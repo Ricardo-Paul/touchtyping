@@ -55,6 +55,11 @@ h2{
   color: #51ff60;
 }
 
+/* right word color */
+.correct{
+  color: #51ff60;
+}
+
 #text-display{
   padding: .5rem;
   font-size: 1.2rem;
@@ -64,6 +69,8 @@ h2{
 }
 
 
+
+/* input field color for word mismatch */
 .wrong{
   background-color: #f1bdbd;
 }
