@@ -85,7 +85,9 @@ inputField.addEventListener("keydown", (e) => {
               console.log("RIGHT WORD");
               textDisplay.childNodes[currentWord].classList.add("correct");
               console.log("CURRENT WORD NODE: ",textDisplay.childNodes[currentWord])
-            };
+            } else {
+              textDisplay.childNodes[currentWord].classList.add("incorrect");
+            }
 
             currentWord < wordList.length -1  && textDisplay.childNodes[currentWord + 1].classList.add("highlight");
           currentWord < wordList.length &&  currentWord++;
@@ -95,13 +97,13 @@ inputField.addEventListener("keydown", (e) => {
           if(currentWord === wordList.length){
             inputField.value = "";
             alert("Your result is ready");
-          }
+          };
         };
         inputField.value = "";
       }
     }
   }
-})
+});
 
 function setLanguage(_language = defaultLanguage){
   textDisplay.innerHTML = "Loading text..."

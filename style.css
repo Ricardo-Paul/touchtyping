@@ -55,6 +55,10 @@ h2{
   color: #ffffff;
 }
 
+.incorrect{
+  color: #ffb7ab;
+}
+
 /* right word color */
 .correct{
   color: #51ff60;
