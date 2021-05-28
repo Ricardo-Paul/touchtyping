@@ -5,7 +5,7 @@ const inputField = document.querySelector("#input-field");
 let randomWords = [];
 let wordList = []; //displayed words
 const defaultLanguage = "english";
-const defaultWordCount = 25;
+const defaultWordCount = 5;
 let currentWord = 0;
 
 const cookies = {
@@ -79,19 +79,25 @@ inputField.addEventListener("keydown", (e) => {
 
       if(e.key === " "){
         if(inputField.value.trim() !== ""){
-          // making sure this is not the last word in the list
-          if(currentWord < wordList.length - 1){
             console.log("FIELD VALUE:", inputField.value, "CW:", wordList[currentWord]);
             let fieldValue = inputField.value;
             if(fieldValue.trim() === wordList[currentWord]){
               console.log("RIGHT WORD");
               textDisplay.childNodes[currentWord].classList.add("correct");
               console.log("CURRENT WORD NODE: ",textDisplay.childNodes[currentWord])
-            }
-            currentWord++;
+            };
+
+            currentWord < wordList.length -1  && textDisplay.childNodes[currentWord + 1].classList.add("highlight");
+          currentWord < wordList.length &&  currentWord++;
+
+          console.log("CURRENT WORD NO::", currentWord)
+          console.log("LIST LENGTH::", wordList.length)
+          if(currentWord === wordList.length){
             inputField.value = "";
+            alert("Your result is ready");
           }
-        }
+        };
+        inputField.value = "";
       }
     }
   }
