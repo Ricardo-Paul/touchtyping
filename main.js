@@ -6,7 +6,7 @@ let randomWords = [];
 let wordList = []; //displayed words
 const defaultLanguage = "english";
 const defaultWordCount = 25;
-let typingMode;
+let typingMode = getCookie("typingMode") || "wordCountBase";
 
 let currentWord = 0;
 let correctKeys = 0;
@@ -20,7 +20,29 @@ const cookies = {
   expireAfter: 5
 };
 
-typingMode = getCookie("typingMode") || setCookie('typingMode',"wordCountBase", 90);
+
+
+console.log("TM:::",typingMode);
+setTypingMode(typingMode)
+
+function setTypingMode(mode){
+  console.log("MODE", mode)
+  setCookie('typingMode', mode, 90);
+    let wordBaseDisplay = document.querySelector("#word-count");
+    let timeBaseDisplay = document.querySelector("#time-count");
+    console.log(wordBaseDisplay, timeBaseDisplay);
+    switch(typingMode){
+      case "wordCountBase":{
+        wordBaseDisplay.style.display = "block";
+        timeBaseDisplay.style.display = "none";
+      }
+      break;
+      case "timeBase": {
+        wordBaseDisplay.style.display = "none";
+        timeBaseDisplay.style.display = "block"
+      }
+    }
+}
 
 function fillWordList(_wordCount = defaultWordCount){
   // decide whether to empty the wordlist when shift is pressed
