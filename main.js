@@ -48,14 +48,12 @@ function setTypingMode(mode){
 };
 
 function setTimeCount(timeCount){
-  alert( timeCount);
+  // alert( timeCount);
   setCookie("timeCount", timeCount, 90);
-  timeBaseDisplay.childNodes.forEach(span => {
-    // span.innerHTML = "YEY";
-    // do something funny there
-  });
-  let selectedTime = document.querySelector(`#tc-${timeCount}`);
-  selectedTime.style.borderBottom = "2px solid";
+  let nodes = document.querySelectorAll("#time-count > span");
+  let arr = [...nodes]
+  arr.forEach(el => el.style.borderBottom = "");
+  arr.filter(el => el.id === `tc-${timeCount}`)[0].style.borderBottom = "2px solid";
 }
 
 function fillWordList(_wordCount = defaultWordCount){
