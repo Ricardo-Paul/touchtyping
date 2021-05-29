@@ -6,15 +6,20 @@ let randomWords = [];
 let wordList = []; //displayed words
 const defaultLanguage = "english";
 const defaultWordCount = 5;
+const typingMode = "wordCount";
+
 let currentWord = 0;
+let correctKeys = 0;
+let startDate;
 
 const cookies = {
   language: "LANGUAGE",
   wordCount: "WORDCOUNT",
   expireAfter: 5
-}
+};
 
-let testsWords = "hello world hello".split(" ");
+
+
 
 function fillWordList(_wordCount = defaultWordCount){
   // decide whether to empty the wordlist when shift is pressed
@@ -34,6 +39,7 @@ function fillWordList(_wordCount = defaultWordCount){
 
 function showText(){
   textDisplay.innerHTML = "";
+  inputField.focus();
   wordList.forEach(word => {
     let span = document.createElement("span");
     span.innerHTML = word + " ";
@@ -84,7 +90,11 @@ inputField.addEventListener("keydown", (e) => {
             if(fieldValue.trim() === wordList[currentWord]){
               console.log("RIGHT WORD");
               textDisplay.childNodes[currentWord].classList.add("correct");
-              console.log("CURRENT WORD NODE: ",textDisplay.childNodes[currentWord])
+              console.log("CURRENT WORD NODE: ",textDisplay.childNodes[currentWord]);
+
+              // only correct keys from current words are counted
+              correctKeys += wordList[currentWord].length;
+              console.log("CK:", correctKeys);
             } else {
               textDisplay.childNodes[currentWord].classList.add("incorrect");
             }
@@ -96,14 +106,39 @@ inputField.addEventListener("keydown", (e) => {
           console.log("LIST LENGTH::", wordList.length)
           if(currentWord === wordList.length){
             inputField.value = "";
-            alert("Your result is ready");
+            showResult();
           };
         };
         inputField.value = "";
       }
     }
   }
+
+  const isFirstCharacter = inputField.value === "" && currentWord === 0;
+  if(isFirstCharacter){
+    switch(typingMode){
+      case "wordCount":{
+        startDate = Date.now();
+      }
+    }
+  }
 });
+
+function showResult(){
+  const resultSpace = document.querySelector("#right-wing");
+  let words, minute, acc, totalKeys = 0;
+  switch(typingMode){
+    case "wordCount":{
+      words = correctKeys / 5;
+      minute = (Date.now() - startDate) / 1000 / 60;
+      wordList.forEach(w => totalKeys += w.length);
+      acc = Math.floor((correctKeys / totalKeys) * 100);
+      console.log("WPM", words, minute, "acc:", acc );
+    }
+  }
+
+  console.log('result is ready');
+}
 
 function setLanguage(_language = defaultLanguage){
   textDisplay.innerHTML = "Loading text..."
