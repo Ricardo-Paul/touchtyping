@@ -1,12 +1,17 @@
 const textDisplay = document.querySelector("#text-display");
 const inputField = document.querySelector("#input-field");
 
+let wordBaseDisplay = document.querySelector("#word-count");
+let timeBaseDisplay = document.querySelector("#time-count");
+
 
 let randomWords = [];
 let wordList = []; //displayed words
 const defaultLanguage = "english";
 const defaultWordCount = 25;
 let typingMode = getCookie("typingMode") || "wordCountBase";
+let timeCount = getCookie("timeCount") || 60;
+
 
 let currentWord = 0;
 let correctKeys = 0;
@@ -28,8 +33,6 @@ setTypingMode(typingMode)
 function setTypingMode(mode){
   console.log("MODE", mode)
   setCookie('typingMode', mode, 90);
-    let wordBaseDisplay = document.querySelector("#word-count");
-    let timeBaseDisplay = document.querySelector("#time-count");
     console.log(wordBaseDisplay, timeBaseDisplay);
     switch(typingMode){
       case "wordCountBase":{
@@ -39,9 +42,20 @@ function setTypingMode(mode){
       break;
       case "timeBase": {
         wordBaseDisplay.style.display = "none";
-        timeBaseDisplay.style.display = "block"
+        timeBaseDisplay.style.display = "block";
       }
     }
+};
+
+function setTimeCount(timeCount){
+  alert( timeCount);
+  setCookie("timeCount", timeCount, 90);
+  timeBaseDisplay.childNodes.forEach(span => {
+    // span.innerHTML = "YEY";
+    // do something funny there
+  });
+  let selectedTime = document.querySelector(`#tc-${timeCount}`);
+  selectedTime.style.borderBottom = "2px solid";
 }
 
 function fillWordList(_wordCount = defaultWordCount){
@@ -152,7 +166,8 @@ inputField.addEventListener("keydown", (e) => {
           if(seconds > 0){
             timer = setTimeout(() => {
               seconds--;
-              startTimer(seconds)
+              startTimer(seconds);
+              document.querySelector(`#tc-${timeCount}`).innerHTML = seconds;
               console.log("SECONDS", seconds)
             }, 1000)
           } else {
@@ -228,5 +243,3 @@ function getCookie(cname){
     }
   };
 };
-
-getCookie("timeCount");
