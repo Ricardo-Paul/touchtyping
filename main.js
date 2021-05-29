@@ -6,20 +6,21 @@ let randomWords = [];
 let wordList = []; //displayed words
 const defaultLanguage = "english";
 const defaultWordCount = 25;
-const typingMode = "wordCount";
+let typingMode;
 
 let currentWord = 0;
 let correctKeys = 0;
 let startDate;
+let timer;
 
 const cookies = {
   language: "LANGUAGE",
   wordCount: "WORDCOUNT",
+  typingMode: "TYPING_MODE",
   expireAfter: 5
 };
 
-
-
+typingMode = getCookie("typingMode") || setCookie('typingMode',"wordCountBase", 90);
 
 function fillWordList(_wordCount = defaultWordCount){
   // decide whether to empty the wordlist when shift is pressed
@@ -117,8 +118,27 @@ inputField.addEventListener("keydown", (e) => {
   const isFirstCharacter = inputField.value === "" && currentWord === 0;
   if(isFirstCharacter){
     switch(typingMode){
-      case "wordCount":{
+      case "wordCountBase":{
         startDate = Date.now();
+        setCookie("typingMode", "wordCountBase", 90);
+      }
+      case "timeBase":{
+        startTimer(4);
+        setCookie("typingMode", "timeBase", 90);
+
+        function startTimer(seconds){
+          if(seconds > 0){
+            timer = setTimeout(() => {
+              seconds--;
+              startTimer(seconds)
+              console.log("SECONDS", seconds)
+            }, 1000)
+          } else {
+            clearTimeout(timer);
+            textDisplay.innerHTML = "";
+            inputField.value = "";
+          }
+        }
       }
     }
   }
@@ -128,7 +148,7 @@ function showResult(){
   const resultSpace = document.querySelector("#right-wing");
   let words, minute, acc, wpm, totalKeys = 0;
   switch(typingMode){
-    case "wordCount":{
+    case "wordCountBase":{
       words = correctKeys / 5;
       minute = (Date.now() - startDate) / 1000 / 60;
       wpm = Math.floor(words / minute);
