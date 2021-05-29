@@ -5,7 +5,7 @@ const inputField = document.querySelector("#input-field");
 let randomWords = [];
 let wordList = []; //displayed words
 const defaultLanguage = "english";
-const defaultWordCount = 5;
+const defaultWordCount = 25;
 const typingMode = "wordCount";
 
 let currentWord = 0;
@@ -126,13 +126,17 @@ inputField.addEventListener("keydown", (e) => {
 
 function showResult(){
   const resultSpace = document.querySelector("#right-wing");
-  let words, minute, acc, totalKeys = 0;
+  let words, minute, acc, wpm, totalKeys = 0;
   switch(typingMode){
     case "wordCount":{
       words = correctKeys / 5;
       minute = (Date.now() - startDate) / 1000 / 60;
+      wpm = Math.floor(words / minute);
       wordList.forEach(w => totalKeys += w.length);
       acc = Math.floor((correctKeys / totalKeys) * 100);
+
+
+      resultSpace.innerHTML = `WPM: ${wpm} ACC: ${acc}`;
       console.log("WPM", words, minute, "acc:", acc );
     }
   }
