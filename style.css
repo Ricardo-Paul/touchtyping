@@ -66,6 +66,7 @@ h2{
   font-size: 1.2rem;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   color: #f5deb3;
+  overflow: hidden;
   /* background-color: azure; */
 }
 

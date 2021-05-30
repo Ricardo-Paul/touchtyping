@@ -49,14 +49,19 @@ function setTypingMode(mode){
 
 // function called from index.html
 function setTimeCount(timeCount){
+  clearTimeout(timer);
   // alert( timeCount);
   setCookie("timeCount", timeCount, 90);
   let nodes = document.querySelectorAll("#time-count > span");
   let arr = [...nodes];
-  arr.forEach(el => el.style.borderBottom = "");
+  arr.forEach(el => {
+    el.style.borderBottom = "";
+    el.innerHTML = el.id.slice(-2);
+    if(el.id.length > 5) el.innerHTML = el.id.slice(-3);
+  });
   arr.filter(el => el.id === `tc-${timeCount}`)[0].style.borderBottom = "2px solid";
   showText();
-}
+};
 
 function fillWordList(_wordCount = defaultWordCount){
   // decide whether to empty the wordlist when shift is pressed
@@ -71,6 +76,8 @@ function fillWordList(_wordCount = defaultWordCount){
     }
     break;
     case "timeBase": {
+      textDisplay.style.height = "2.2rem";
+      textDisplay.style.fontSize = "1.2rem";
       for(let i=0; i < 500; i++){
         let random = Math.floor(Math.random() * randomWords.length);
         wordList.push(randomWords[random].trim());
@@ -167,7 +174,7 @@ inputField.addEventListener("keydown", (e) => {
         setCookie("typingMode", "wordCountBase", 90);
       }
       case "timeBase":{
-        startTimer(4);
+        startTimer(getCookie("timeCount") || 60);
         setCookie("typingMode", "timeBase", 90);
 
         function startTimer(seconds){
