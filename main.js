@@ -270,3 +270,9 @@ function getCookie(cname){
     }
   };
 };
+
+document.onload = (function(){
+  if(typingMode === "timeBase"){
+    document.querySelector(`#tc-${timeCount}`).style.borderBottom = "2px solid";
+  }
+})();
