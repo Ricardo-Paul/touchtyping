@@ -1,3 +1,4 @@
+
 const textDisplay = document.querySelector("#text-display");
 const inputField = document.querySelector("#input-field");
 
@@ -25,10 +26,6 @@ const cookies = {
   expireAfter: 5
 };
 
-
-
-console.log("TM:::",typingMode);
-setTypingMode(typingMode)
 
 function setTypingMode(mode){
   console.log("MODE", mode)
@@ -199,8 +196,9 @@ inputField.addEventListener("keydown", (e) => {
             }, 1000)
           } else {
             clearTimeout(timer);
-            textDisplay.innerHTML = "";
+            textDisplay.innerHTML = "Time out";
             inputField.value = "";
+            showResult();
           }
         }
       }
@@ -211,21 +209,31 @@ inputField.addEventListener("keydown", (e) => {
 function showResult(){
   const resultSpace = document.querySelector("#right-wing");
   let words, minute, acc, wpm, totalKeys = 0;
+  words = correctKeys / 5;
+  wordList.forEach(w => totalKeys += w.length);
+
   switch(typingMode){
     case "wordCountBase":{
-      words = correctKeys / 5;
       minute = (Date.now() - startDate) / 1000 / 60;
-      wpm = Math.floor(words / minute);
-      wordList.forEach(w => totalKeys += w.length);
       acc = Math.floor((correctKeys / totalKeys) * 100);
-
-
-      resultSpace.innerHTML = `WPM: ${wpm} ACC: ${acc}`;
-      console.log("WPM", words, minute, "acc:", acc );
+    }
+    break;
+    case "timeBase": {
+      minute = timeCount / 60 //timecount in secs / 60
+      let typedKeys =0;
+      for(i=0; i < currentWord; i++){
+        typedKeys += wordList[currentWord].length;
+      };
+      
+      acc = Math.min(Math.floor((correctKeys / typedKeys) * 100), 100);
     }
   }
+  wpm = Math.floor(words / minute);
+  resultSpace.innerHTML = `WPM: ${wpm} ACC: ${acc}`;
 
+  console.log("WPM", words, minute, "acc:", acc );
   console.log('result is ready');
+  console.log("KT", totalKeys, "CK", correctKeys)
 }
 
 function setLanguage(_language = defaultLanguage){
@@ -272,6 +280,7 @@ function getCookie(cname){
 };
 
 document.onload = (function(){
+  setTypingMode(typingMode);
   if(typingMode === "timeBase"){
     document.querySelector(`#tc-${timeCount}`).style.borderBottom = "2px solid";
   }
