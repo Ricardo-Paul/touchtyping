@@ -66,11 +66,14 @@ function setTimeCount(_timeCount){
   };
 
   arr.filter(el => el.id === `tc-${timeCount}`)[0].style.borderBottom = "2px solid";
-  showText();
+  fillWordList();
 };
 
 function fillWordList(_wordCount = defaultWordCount){
   // decide whether to empty the wordlist when shift is pressed
+
+  wordList = [];
+  currentWord = 0;
   let wordCount = getCookie(cookies.wordCount) || _wordCount;
   setCookie(cookies.wordCount, wordCount, cookies.expireAfter);
   switch(typingMode){
@@ -97,6 +100,9 @@ function fillWordList(_wordCount = defaultWordCount){
 
 function showText(){
   textDisplay.innerHTML = "";
+  // currentWord = 0;
+  // alert("executed")
+
   inputField.focus();
   wordList.forEach(word => {
     let span = document.createElement("span");
