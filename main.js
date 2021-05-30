@@ -48,17 +48,23 @@ function setTypingMode(mode){
 };
 
 // function called from index.html
-function setTimeCount(timeCount){
+function setTimeCount(_timeCount){
   clearTimeout(timer);
+  timeCount =_timeCount //affect the timecount var
   // alert( timeCount);
   setCookie("timeCount", timeCount, 90);
   let nodes = document.querySelectorAll("#time-count > span");
   let arr = [...nodes];
-  arr.forEach(el => {
-    el.style.borderBottom = "";
-    el.innerHTML = el.id.slice(-2);
-    if(el.id.length > 5) el.innerHTML = el.id.slice(-3);
-  });
+  setTimerHtml();
+
+  function setTimerHtml(){
+    arr.forEach(el => {
+      el.style.borderBottom = "";
+      el.innerHTML = el.id.slice(-2);
+      if(el.id.length > 5) el.innerHTML = el.id.slice(-3);
+    });
+  };
+
   arr.filter(el => el.id === `tc-${timeCount}`)[0].style.borderBottom = "2px solid";
   showText();
 };
