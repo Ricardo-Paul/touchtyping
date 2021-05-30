@@ -47,26 +47,36 @@ function setTypingMode(mode){
     }
 };
 
+// function called from index.html
 function setTimeCount(timeCount){
   // alert( timeCount);
   setCookie("timeCount", timeCount, 90);
   let nodes = document.querySelectorAll("#time-count > span");
-  let arr = [...nodes]
+  let arr = [...nodes];
   arr.forEach(el => el.style.borderBottom = "");
   arr.filter(el => el.id === `tc-${timeCount}`)[0].style.borderBottom = "2px solid";
+  showText();
 }
 
 function fillWordList(_wordCount = defaultWordCount){
   // decide whether to empty the wordlist when shift is pressed
-
-  // it's better to fetch wordcount from cookie 
   let wordCount = getCookie(cookies.wordCount) || _wordCount;
   setCookie(cookies.wordCount, wordCount, cookies.expireAfter);
-  for(i=0; i < wordCount; i++ ){
-    let random = Math.floor(Math.random() * randomWords.length);
-    // don't display the same word consequently
-      wordList.push(randomWords[random].trim());
-  };
+  switch(typingMode){
+    case "wordCountBase":{
+      for(i=0; i < wordCount; i++ ){
+        let random = Math.floor(Math.random() * randomWords.length);
+          wordList.push(randomWords[random].trim());
+      };
+    }
+    break;
+    case "timeBase": {
+      for(let i=0; i < 500; i++){
+        let random = Math.floor(Math.random() * randomWords.length);
+        wordList.push(randomWords[random].trim());
+      }
+    }
+  }
 
   showText();
   console.log(wordList);
