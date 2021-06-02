@@ -51,7 +51,7 @@ function setTimeCount(_timeCount){
   // alert( timeCount);
   setCookie("timeCount", timeCount, 90);
   let nodes = document.querySelectorAll("#time-count > span");
-  let arr = [...nodes];
+  let arr = [...nodes]; //convert the node list into an array
   setTimerHtml();
 
   function setTimerHtml(){
@@ -160,11 +160,22 @@ inputField.addEventListener("keydown", (e) => {
               textDisplay.childNodes[currentWord].classList.add("incorrect");
             }
 
-            currentWord < wordList.length -1  && textDisplay.childNodes[currentWord + 1].classList.add("highlight");
+          currentWord < wordList.length -1  && textDisplay.childNodes[currentWord + 1].classList.add("highlight");
           currentWord < wordList.length &&  currentWord++;
 
           console.log("CURRENT WORD NO::", currentWord)
           console.log("LIST LENGTH::", wordList.length)
+
+          // produce a scroll effect when reaching the end of the first line
+          let currentWordPosition = textDisplay.childNodes[currentWord].getBoundingClientRect();
+          let nextWordPosition = textDisplay.childNodes[currentWord + 1].getBoundingClientRect();
+          if (currentWordPosition.top < nextWordPosition.top){
+            // alert("Skip the line")
+            for(i=0; i < currentWord; i++){
+              textDisplay.childNodes[i].style.display = "none"
+            }
+          }
+
           if(currentWord === wordList.length){
             inputField.value = "";
             showResult();
