@@ -5,6 +5,12 @@ const inputField = document.querySelector("#input-field");
 let wordBaseDisplay = document.querySelector("#word-count");
 let timeBaseDisplay = document.querySelector("#time-count");
 
+const cookies = {
+  language: "LANGUAGE",
+  wordCount: "WORDCOUNT",
+  typingMode: "TYPING_MODE",
+  expireAfter: 5
+};
 
 let randomWords = [];
 let wordList = []; //displayed words
@@ -12,19 +18,13 @@ const defaultLanguage = "english";
 const defaultWordCount = 25;
 let typingMode = getCookie("typingMode") || "wordCountBase";
 let timeCount = getCookie("timeCount") || 60;
-
+let wordCount = getCookie(cookies.wordCount) || 25;
 
 let currentWord = 0;
 let correctKeys = 0;
 let startDate;
 let timer;
 
-const cookies = {
-  language: "LANGUAGE",
-  wordCount: "WORDCOUNT",
-  typingMode: "TYPING_MODE",
-  expireAfter: 5
-};
 
 
 function setTypingMode(mode){
@@ -43,6 +43,14 @@ function setTypingMode(mode){
     }
 };
 
+// fucntion called from index html
+function setWordCount(_wordCount){
+  inputField.value = "";
+  // alert( timeCount);
+  setCookie(cookies.wordCount, _wordCount, 90);
+  alert("Word count set")
+}
+
 // function called from index.html
 function setTimeCount(_timeCount){
   inputField.value = "";
@@ -57,12 +65,14 @@ function setTimeCount(_timeCount){
   function setTimerHtml(){
     arr.forEach(el => {
       el.style.borderBottom = "";
+      el.style.fontWeight = "400"
       el.innerHTML = el.id.slice(-2);
       if(el.id.length > 5) el.innerHTML = el.id.slice(-3);
     });
   };
 
   arr.filter(el => el.id === `tc-${timeCount}`)[0].style.borderBottom = "2px solid";
+  arr.filter(el => el.id === `tc-${timeCount}`)[0].style.fontWeight = "600";
   fillWordList();
 };
 
@@ -222,6 +232,7 @@ inputField.addEventListener("keydown", (e) => {
 });
 
 function showResult(){
+  textDisplay.innerHTML = "";
   const resultSpace = document.querySelector("#right-wing");
   let words, minute, acc, wpm, totalKeys = 0;
   words = correctKeys / 5;

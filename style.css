@@ -74,6 +74,14 @@ h2{
   cursor: pointer;
 }
 
+#left-wing > #time-count, #word-count{
+  /* background-color: #a2eaa8; */
+  padding: .5rem;
+  border-radius: .3rem;
+  border: 1px #bbbbbb solid;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
 /* input field color for word mismatch */
 .wrong{
   background-color: #f1bdbd;
@@ -103,3 +111,19 @@ h2{
 #theme-center{
   display: none;
 };
+
+#footer{
+  background-color: #d8f5ab;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+#show-themes{
+  padding: .4rem;
+  background-color: rgb(184, 180, 180);
+  font-size: 1.2rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: black;
+  cursor: pointer;
+}
