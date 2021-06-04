@@ -70,7 +70,9 @@ h2{
   /* background-color: azure; */
 }
 
-
+#left-wing{
+  cursor: pointer;
+}
 
 /* input field color for word mismatch */
 .wrong{

@@ -28,9 +28,8 @@ const cookies = {
 
 
 function setTypingMode(mode){
-  console.log("MODE", mode)
   setCookie('typingMode', mode, 90);
-    console.log(wordBaseDisplay, timeBaseDisplay);
+
     switch(typingMode){
       case "wordCountBase":{
         wordBaseDisplay.style.display = "block";
@@ -46,6 +45,7 @@ function setTypingMode(mode){
 
 // function called from index.html
 function setTimeCount(_timeCount){
+  inputField.value = "";
   clearTimeout(timer);
   timeCount =_timeCount //affect the timecount var
   // alert( timeCount);
@@ -73,6 +73,7 @@ function fillWordList(_wordCount = defaultWordCount){
   currentWord = 0;
   let wordCount = getCookie(cookies.wordCount) || _wordCount;
   setCookie(cookies.wordCount, wordCount, cookies.expireAfter);
+  // alert(wordCount);
   switch(typingMode){
     case "wordCountBase":{
       for(i=0; i < wordCount; i++ ){
@@ -193,6 +194,7 @@ inputField.addEventListener("keydown", (e) => {
         startDate = Date.now();
         setCookie("typingMode", "wordCountBase", 90);
       }
+      break;
       case "timeBase":{
         startTimer(getCookie("timeCount") || 60);
         setCookie("typingMode", "timeBase", 90);
@@ -241,6 +243,7 @@ function showResult(){
   }
   wpm = Math.floor(words / minute);
   resultSpace.innerHTML = `WPM: ${wpm} ACC: ${acc}`;
+  inputField.classList.remove("wrong");
 
   console.log("WPM", words, minute, "acc:", acc );
   console.log('result is ready');
@@ -276,7 +279,7 @@ function setCookie(cname, cvalue, exdays){
 function getCookie(cname){
 
   // Renovie the cookie string
-  let c = document.cookie || "timeCount=60; typingMode=wordcount; punctuation=false; _ga=GA1.2.212430062.1621050011; theme=moderndolch; wordCount=25; _gid=GA1.2.2029559042.1621902074; language=english; _gat_gtag_UA_126815322_3=1"
+  let c = document.cookie;
 
   let cookies = decodeURIComponent(c);
   let ca = cookies.split(";");
