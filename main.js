@@ -168,12 +168,14 @@ inputField.addEventListener("keydown", (e) => {
           console.log("LIST LENGTH::", wordList.length)
 
           // produce a scroll effect when reaching the end of the first line
-          let currentWordPosition = textDisplay.childNodes[currentWord].getBoundingClientRect();
-          let nextWordPosition = textDisplay.childNodes[currentWord + 1].getBoundingClientRect();
-          if (currentWordPosition.top < nextWordPosition.top){
-            // alert("Skip the line")
-            for(i=0; i < currentWord; i++){
-              textDisplay.childNodes[i].style.display = "none"
+          if(typingMode === "timeBase"){
+            let currentWordPosition = textDisplay.childNodes[currentWord].getBoundingClientRect();
+            let nextWordPosition = textDisplay.childNodes[currentWord + 1].getBoundingClientRect();
+            if (currentWordPosition.top < nextWordPosition.top){
+              // alert("Skip the line")
+              for(i=0; i < currentWord; i++){
+                textDisplay.childNodes[i].style.display = "none"
+              }
             }
           }
 
