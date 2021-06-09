@@ -25,7 +25,10 @@ let correctKeys = 0;
 let startDate;
 let timer;
 
-
+function redo(){
+  // alert("redo is pressed")
+  fillWordList();
+}
 
 function setTypingMode(mode){
   setCookie('typingMode', mode, 90);
@@ -78,7 +81,7 @@ function setTimeCount(_timeCount){
 
 function fillWordList(_wordCount = defaultWordCount){
   // decide whether to empty the wordlist when shift is pressed
-
+  inputField.value = "";
   wordList = [];
   currentWord = 0;
   let wordCount = getCookie(cookies.wordCount) || _wordCount;
