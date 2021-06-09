@@ -49,10 +49,26 @@ function setTypingMode(mode){
 // fucntion called from index html
 function setWordCount(_wordCount){
   inputField.value = "";
+  wordCount = _wordCount;
   // alert( timeCount);
   setCookie(cookies.wordCount, _wordCount, 90);
-  alert("Word count set")
-}
+  let nodes = document.querySelectorAll("#word-count > span");
+  let arr = [...nodes];
+
+  function resetElStyle(){
+    arr.forEach(el => {
+      el.style.borderBottom = "";
+      el.style.fontWeight = "400"
+      el.innerHTML = el.id.slice(-2);
+      if(el.id.length > 5) el.innerHTML = el.id.slice(-3);
+    });
+  };
+
+  resetElStyle();
+
+  arr.filter(el => el.id === `wc-${_wordCount}`)[0].style.borderBottom = "2px solid";
+  fillWordList();
+};
 
 // function called from index.html
 function setTimeCount(_timeCount){
@@ -63,9 +79,9 @@ function setTimeCount(_timeCount){
   setCookie("timeCount", timeCount, 90);
   let nodes = document.querySelectorAll("#time-count > span");
   let arr = [...nodes]; //convert the node list into an array
-  setTimerHtml();
+  resetElStyle();
 
-  function setTimerHtml(){
+  function resetElStyle(){
     arr.forEach(el => {
       el.style.borderBottom = "";
       el.style.fontWeight = "400"
