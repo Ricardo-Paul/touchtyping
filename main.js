@@ -27,6 +27,7 @@ let timer;
 
 function redo(){
   // alert("redo is pressed")
+  // TODO: reset everything score-related when redo is pressed
   fillWordList();
 }
 
@@ -329,5 +330,7 @@ document.onload = (function(){
   setTypingMode(typingMode);
   if(typingMode === "timeBase"){
     document.querySelector(`#tc-${timeCount}`).style.borderBottom = "2px solid";
+  } else {
+    document.querySelector(`#wc-${wordCount}`).style.borderBottom = "2px solid";
   }
 })();

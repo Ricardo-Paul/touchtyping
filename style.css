@@ -1,23 +1,124 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap');
 
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
 body{
-  background-color: rgb(253, 249, 249);
+  background-color: rgb(255 255 255);
   color: rgb(255, 255, 255);
   display: flex;
   flex-direction: column;
   align-items: center;
   /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+  font: 13px/20px 'Lucida Grande', Tahoma, Verdana, sans-serif;
+
 }
 
-h2{
-  font-weight: 900;
+#header{
+  background: #b5b5b5;
+  padding: 10px;
+  border-bottom: 1px solid #949494;
+  border-radius: 5px 5px 0 0;
+  background-image: -webkit-linear-gradient(top, #f9f5f5, #b9b9b9);
+
+
+  -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.15);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.15);
+}
+
+#header > h2 {
+  line-height: 25px;
+  font-size: 15px;
+  color: #505050;
+  text-align: center;
+  text-shadow: 0 1px rgba(255, 255, 255, 0.4);
+}
+
+#header > a {
+  float: left;
+  width: 23px;
+  height: 23px;
+  background: #ddd;
+  background-clip: padding-box;
+  border: 1px solid;
+  border-color: #aaa #9c9c9c #888;
+  border-radius: 13px;
+  font: 0/0 serif;
+  text-shadow: none;
+  color: transparent;
+  background-image: -webkit-linear-gradient(top, #fafafa, #c1c1c1);
+  background-image: -moz-linear-gradient(top, #fafafa, #c1c1c1);
+  background-image: -o-linear-gradient(top, #fafafa, #c1c1c1);
+  background-image: linear-gradient(to bottom, #fafafa, #c1c1c1);
+  -webkit-box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.9);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.9);
+
+  background-image: linear-gradient(to bottom, #eaeaea, #ffffff);
+  position: relative;
+}
+
+#container{
+  box-shadow: 0 2px 2px rgb(0 0 0 / 15%), 0 0 0 1px rgb(0 0 0 / 10%);
+  margin-top: 1rem;
+  border-radius: .4rem;
+}
+
+#header > a:before{
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 12px;
+  height: 12px;
+}
+
+#header > .icon-close {
+  float: right;
+}
+
+#header > a:before {
+  content: '';
+  display: block;
+  background-image: url("./img/icons.png");
+}
+
+#sub-header{
+  /* background-color: aquamarine; */
+  line-height: 25px;
+  font-size: 11px;
+  color: #888;
+  text-align: center;
+  text-transform: uppercase;
+  background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.05));
+  background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.05));
+  background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.05));
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.05));
+
+  border-bottom: 1px solid #d5d5d5;
 }
 
 #command-center{
   /* background-color: bisque; */
   width: 100%;
   max-width: 40rem;
-  padding: .5rem;
+  /* padding: .5rem; */
 }
 #left-wing{
   color: #484847;
@@ -43,9 +144,11 @@ h2{
   display: flex;
   flex-direction: column;
   margin-top: .5rem;
-  background-color: rgb(117, 116, 116);
+  /* background-color: rgb(117, 116, 116); */
   padding: 1rem;
   border-radius: .2rem;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.05));
+  border-top: 1px solid #d5d5d5;
 }
 
 .highlight{
@@ -65,7 +168,7 @@ h2{
   padding: .5rem;
   font-size: 1.4rem;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  color: #f5deb3;
+  color: #888;
   overflow: hidden;
   /* background-color: azure; */
 }
@@ -96,7 +199,7 @@ h2{
   margin-right: .5rem;
   border-radius: .2rem;
   outline: none;
-  border: none;
+  border: 1px solid #d8d8d8;
 }
 
 #redo-button{

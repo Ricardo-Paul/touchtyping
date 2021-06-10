@@ -6,61 +6,70 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="touch typing is a minimalistic typing test app">
   <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="./styles/style.scss" />
   <title>Document</title>
 </head>
 <body>
-  <h2 id="header">Touch Typing</h2>
-  <div id="command-center">
+  <div id="container">
+    <header id="header">
+      <a href="" class="icon-prev">  previous </a>
+      <a href="" class="icon-close"> close  </a>
+      <h2> Settings </h2>
+    </header>
+    <div id="sub-header"> General </div>
 
-    <!-- info bar -->
-    <div class="bar">
-      <div id="left-wing">
+    <div id="command-center">
 
-        <!-- word count -->
-        <div id="word-count">
-          <span id="wc-10" onclick="setWordCount(10)" > 10 </span> /
-          <span id="wc-25" onclick="setWordCount(25)"> 25 </span> /
-          <span id="wc-50" onclick="setWordCount(50)"> 50 </span> /
-          <span id="wc-100" onclick="setWordCount(100)"> 100 </span> /
-          <span id="wc-250" onclick="setWordCount(250)"> 250 </span> 
-        </div>
-        
-        <!-- time count -->
-        <div id="time-count">
-          <span id="tc-15" onclick="setTimeCount(15)" > 15 </span>  /
-          <span id="tc-30" onclick="setTimeCount(30)"> 30 </span> /
-          <span id="tc-60" onclick="setTimeCount(60)"> 60 </span> /
-          <span id="tc-120" onclick="setTimeCount(120)"> 120 </span> /
-          <span id="tc-240" onclick="setTimeCount(240)"> 240 </span> 
-        </div>
-      </div>
-      <div id="right-wing">
-        WPM: n ACC: n%
-      </div>
-    </div>
-
-    <!-- typing area -->
-    <div id="typing-area">
-      <div id="text-display"> </div>
+      <!-- info bar -->
       <div class="bar">
-        <input type="text" id="input-field" tabindex="1">
-        <button onclick="redo()" id="redo-button"tabindex="2"> redo </button>
+        
+        <div id="left-wing">
+  
+          <!-- word count -->
+          <div id="word-count">
+            <span id="wc-10" onclick="setWordCount(10)" > 10 </span> /
+            <span id="wc-25" onclick="setWordCount(25)"> 25 </span> /
+            <span id="wc-50" onclick="setWordCount(50)"> 50 </span> /
+            <span id="wc-100" onclick="setWordCount(100)"> 100 </span> /
+            <span id="wc-250" onclick="setWordCount(250)"> 250 </span> 
+          </div>
+          
+          <!-- time count -->
+          <div id="time-count">
+            <span id="tc-15" onclick="setTimeCount(15)" > 15 </span>  /
+            <span id="tc-30" onclick="setTimeCount(30)"> 30 </span> /
+            <span id="tc-60" onclick="setTimeCount(60)"> 60 </span> /
+            <span id="tc-120" onclick="setTimeCount(120)"> 120 </span> /
+            <span id="tc-240" onclick="setTimeCount(240)"> 240 </span> 
+          </div>
+        </div>
+        <div id="right-wing">
+          WPM: n ACC: n%
+        </div>
+      </div>
+  
+      <!-- typing area -->
+      <div id="typing-area">
+        <div id="text-display"> </div>
+        <div class="bar">
+          <input type="text" id="input-field" tabindex="1">
+          <button onclick="redo()" id="redo-button"tabindex="2"> redo </button>
+        </div>
+      </div>
+  
+      <!-- theme center -->
+      <div id="theme-center">
+        <div id="left-wing" class="hidden"> < Go back </div>
+        <div id="theme-area"> all the themes go here </div>
       </div>
     </div>
-
-    <!-- theme center -->
-    <div id="theme-center">
-      <div id="left-wing" class="hidden"> < Go back </div>
-      <div id="theme-area"> all the themes go here </div>
-    </div>
+  
+      <!-- footer -->
+      <div id="footer">
+        <!-- <a href="#" target="_blank"> user guide </a> -->
+        <!-- <div id="show-themes" class="button"> themes </div> -->
+      </div>  
   </div>
-
-    <!-- footer -->
-    <div id="footer">
-      <!-- <a href="#" target="_blank"> user guide </a> -->
-      <div id="show-themes" class="button"> themes </div>
-    </div>
-
   <!-- script -->
   <script src="./main.js"></script>
 </body>
